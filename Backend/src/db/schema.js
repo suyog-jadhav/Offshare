@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS print_jobs (
 
     status TEXT,                      -- PENDING / PRINTED / FAILED
     printed_at DATETIME,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (file_id) REFERENCES files(id),
     FOREIGN KEY (settings_id) REFERENCES print_settings(id)

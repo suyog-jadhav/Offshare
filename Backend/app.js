@@ -1,5 +1,5 @@
 import express from "express";
-import offlineUploadRouter from "./src/routes/offlineUpload.routes.js";
+
 import qrRouter from "./src/routes/qr.routes.js";
 import shopRouter from "./src/routes/shop.routes.js";
 import cors from "cors";
