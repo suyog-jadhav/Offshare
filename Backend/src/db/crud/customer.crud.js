@@ -10,3 +10,8 @@ export const createCustomer = (customer) => {
 export const getCustomerById = (id) => {
     return db.prepare(`SELECT * FROM customers WHERE id = ?`).get(id);
 };
+export const getCustomerByPhone = (phone) => {
+  return db
+    .prepare(`SELECT * FROM customers WHERE phone = ?`)
+    .get(phone);
+};
