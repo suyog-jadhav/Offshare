@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QR Viewer</title>
+</head>
+<body>
+  <h2>Scan to Connect</h2>
+  <img id="qr" width="300" />
+
+  <script>
+    fetch("http://localhost:8000/qr/")
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("qr").src = data.data.qr;
+      });
+  </script>
+</body>
+</html>
