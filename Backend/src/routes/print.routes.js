@@ -20,5 +20,8 @@ router.get("/settings/:session_id", getSettings);
 /* PRINT JOBS */
 router.post("/jobs/create", createPrintJobs);
 router.get("/jobs/session/:session_id", getJobsBySession);
+router.put("/jobs/:id/print",printJob);
+router.put("/jobs/:id/cancel",cancelPrintJob);
+router.put("/jobs/:id/fail",failPrintJob);
 
 export default router;
