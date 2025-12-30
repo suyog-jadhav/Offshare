@@ -5,25 +5,36 @@ import {
   getFilesForSession,
   deleteSessionFileById
 } from "../controllers/file.controller.js";
+import { validateActiveSession } from "../middlewares/sessionValidation.middleware.js";
 
 const router = Router();
 
-// Upload multiple files
+/* =========================
+   UPLOAD FILES
+   ========================= */
+// session_id comes from body
 router.post(
   "/upload",
   upload.array("files", 10),
+  validateActiveSession,
   uploadFiles
 );
 
-// Get files for a session
+/* =========================
+   GET FILES FOR SESSION
+   ========================= */
 router.get(
   "/session/:session_id",
+  validateActiveSession,
   getFilesForSession
 );
 
-// Delete file (session-guarded)
+/* =========================
+   DELETE FILE
+   ========================= */
 router.delete(
-  "/:session_id/:id",
+  "/session/:session_id/file/:id",
+  validateActiveSession,
   deleteSessionFileById
 );
 

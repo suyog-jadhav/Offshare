@@ -7,9 +7,11 @@ import {
   getStorageInfo,
   forceEndSession
 } from "../controllers/system.controller.js";
+import { verifyShopAuth } from "../middlewares/shopAuth.middleware.js";
 
 const router = Router();
 
+router.use(verifyShopAuth)
 router.get("/health", healthCheck);
 router.post("/cleanup", cleanupSessions);
 router.get("/sessions/active", getActiveSessions);

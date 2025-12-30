@@ -1,13 +1,12 @@
 import { Router } from "express";
 
-/* PRINT SETTINGS CONTROLLERS */
+/* CONTROLLERS */
 import {
   createSettings,
   updateSettings,
   getSettings
 } from "../controllers/printSettings.controller.js";
 
-/* PRINT JOB CONTROLLERS */
 import {
   createPrintJobController,
   getJobsBySessionController,
@@ -16,23 +15,66 @@ import {
   failPrintJobController
 } from "../controllers/printJobs.controller.js";
 
+/* MIDDLEWARES */
+import { validateActiveSession } from "../middlewares/sessionValidation.middleware.js";
+import { verifyShopAuth } from "../middlewares/shopAuth.middleware.js";
+
 const router = Router();
 
 /* =========================
-   PRINT SETTINGS
+   PRINT SETTINGS (USER)
    ========================= */
-router.post("/settings", createSettings);
-router.put("/settings/:session_id", updateSettings);
-router.get("/settings/:session_id", getSettings);
+router.post(
+  "/settings",
+  validateActiveSession,
+  createSettings
+);
+
+router.put(
+  "/settings/:session_id",
+  validateActiveSession,
+  updateSettings
+);
+
+router.get(
+  "/settings/:session_id",
+  validateActiveSession,
+  getSettings
+);
 
 /* =========================
-   PRINT JOBS
+   PRINT JOBS (SHOP)
    ========================= */
-router.post("/jobs/create", createPrintJobController);
-router.get("/jobs/session/:session_id", getJobsBySessionController);
+router.post(
+  "/jobs/create",
+  verifyShopAuth,
+  validateActiveSession,
+  createPrintJobController
+);
 
-router.put("/jobs/:id/print", printJobController);
-router.put("/jobs/:id/cancel", cancelPrintJobController);
-router.put("/jobs/:id/fail", failPrintJobController);
+router.get(
+  "/jobs/session/:session_id",
+  verifyShopAuth,
+  validateActiveSession,
+  getJobsBySessionController
+);
+
+router.put(
+  "/jobs/:id/print",
+  verifyShopAuth,
+  printJobController
+);
+
+router.put(
+  "/jobs/:id/cancel",
+  verifyShopAuth,
+  cancelPrintJobController
+);
+
+router.put(
+  "/jobs/:id/fail",
+  verifyShopAuth,
+  failPrintJobController
+);
 
 export default router;

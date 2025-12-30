@@ -1,12 +1,13 @@
 import {Router} from "express";
 import QRCode from "qrcode";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import { getLocalIP } from "../utils/IPprovider.js";
+import { verifyShopAuth } from "../middlewares/shopAuth.middleware.js";
 
 const router = Router();
 
-router.get("/",async (req,res)=>{
+router.get("/",verifyShopAuth,async (req,res)=>{
     const ssid = "Suyog-Laptop"
     const password = "12345678"
     const auth = "WPA"

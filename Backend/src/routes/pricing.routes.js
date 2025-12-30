@@ -6,6 +6,7 @@ import {
     deletePricing,
     lookupPricing
 } from "../controllers/pricing.controller.js";
+import { verifyShopAuth } from "../middlewares/shopAuth.middleware.js";
 
 const router = Router();
 
@@ -17,6 +18,7 @@ router.get("/lookup", lookupPricing);
 /**
  * Admin routes
  */
+router.use(verifyShopAuth)
 router.post("/", createPricing);
 router.get("/", getAllPricingController);
 router.put("/:id", updatePricing);
