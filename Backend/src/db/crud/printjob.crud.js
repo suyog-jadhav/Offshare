@@ -1,3 +1,5 @@
+import db from "../connection.js";
+
 export const createPrintJob = (job) => {
     db.prepare(`
         INSERT INTO print_jobs (
@@ -45,4 +47,13 @@ export const getJobsBySession = (session_id) => {
         WHERE f.session_id = ?
         ORDER BY pj.created_at DESC
     `).all(session_id);
+};
+
+
+export const getPrintJobById = (id) => {
+    return db.prepare(`
+        SELECT *
+        FROM print_jobs
+        WHERE id = ?
+    `).get(id);
 };

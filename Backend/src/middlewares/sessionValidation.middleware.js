@@ -12,19 +12,20 @@ export const validateActiveSession = (req, res, next) => {
     }
 
     const session = db.prepare(`
-        SELECT id, status
-        FROM sessions
-        WHERE id = ?
+    SELECT id, is_active
+    FROM sessions
+    WHERE id = ?
     `).get(sessionId);
-
+    
     if (!session) {
         throw new ApiError(404, "Session not found");
     }
 
-    if (session.status !== "ACTIVE") {
+    if (session.is_active !== 1) {
         throw new ApiError(409, "Session is not active");
     }
 
+    
     // attach to request for later use
     req.session = session;
 

@@ -7,9 +7,13 @@ import {
     cancelPrintJob,
     failPrintJob,
     getJobsBySession
-} from "../db/crud/printJobs.crud.js";
-import { sendToPrinter } from "../services/printer.service.js";
-import { getPrintJobById } from "../db/crud/printJobs.crud.js";
+} from "../db/crud/printjob.crud.js";
+import { sendToPrinter } from "../utils/printer.js";
+import { getPrintJobById } from "../db/crud/printjob.crud.js";
+import { calculatePrintCost } from "../utils/pricing.js";
+import { calculatePageCount } from "../utils/pageCount.js";
+import { v4 as uuidv4 } from "uuid";
+
 
 
 /**

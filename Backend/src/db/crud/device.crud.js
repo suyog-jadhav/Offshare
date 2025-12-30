@@ -1,4 +1,4 @@
-import db from "../db/connection.js";
+import db from "../connection.js";
 
 export const upsertDevice = (device) => {
     db.prepare(`

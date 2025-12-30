@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import crypto from "crypto";
-import fs from "fs";
+import fs from "fs/promises";
 
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
@@ -32,7 +32,7 @@ export const uploadFiles = asyncHandler(async (req, res) => {
 
   // 3️⃣ Process each file
   for (const file of req.files) {
-    const buffer = fs.readFileSync(file.path);
+    const buffer = await fs.readFileSync(file.path);
     const checksum = crypto
       .createHash("sha256")
       .update(buffer)

@@ -5,15 +5,15 @@ import {
   createSettings,
   updateSettings,
   getSettings
-} from "../controllers/printSettings.controller.js";
+} from "../controllers/settings.controller.js";
 
 import {
-  createPrintJobController,
+  createPrintJobsController,
   getJobsBySessionController,
   printJobController,
   cancelPrintJobController,
   failPrintJobController
-} from "../controllers/printJobs.controller.js";
+} from "../controllers/jobs.controller.js";
 
 /* MIDDLEWARES */
 import { validateActiveSession } from "../middlewares/sessionValidation.middleware.js";
@@ -49,7 +49,7 @@ router.post(
   "/jobs/create",
   verifyShopAuth,
   validateActiveSession,
-  createPrintJobController
+  createPrintJobsController
 );
 
 router.get(

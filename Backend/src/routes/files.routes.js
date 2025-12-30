@@ -4,7 +4,7 @@ import {
   uploadFiles,
   getFilesForSession,
   deleteSessionFileById
-} from "../controllers/file.controller.js";
+} from "../controllers/files.controller.js";
 import { validateActiveSession } from "../middlewares/sessionValidation.middleware.js";
 
 const router = Router();

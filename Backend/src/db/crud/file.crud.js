@@ -1,4 +1,4 @@
-import db from "../db/connection.js";
+import db from "../connection.js";
 
 export const createFile = (file) => {
     db.prepare(`

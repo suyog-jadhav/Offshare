@@ -1,4 +1,5 @@
 import db from "../connection.js";
+import {SESSION_TTL,HEARTBEAT_EXTEND} from "../../../constants.js";
 
 /*
   SESSION CRUD (FINAL)
@@ -29,7 +30,7 @@ export const createSessionInDB = ({ id, device_id }) => {
       1,
       CURRENT_TIMESTAMP,
       CURRENT_TIMESTAMP,
-      DATETIME('now', '+180 seconds')
+      DATETIME('now', '+${SESSION_TTL} seconds')
     )
   `).run({ id, device_id });
 };
@@ -57,7 +58,7 @@ export const updateHeartbeatInDB = (session_id) => {
     UPDATE sessions
     SET
       last_activity_at = CURRENT_TIMESTAMP,
-      expires_at = DATETIME('now', '+30 seconds')
+      expires_at = DATETIME('now', '+${HEARTBEAT_EXTEND} seconds')
     WHERE id = ?
       AND is_active = 1
   `).run(session_id);

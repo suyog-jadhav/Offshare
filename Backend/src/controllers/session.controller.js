@@ -5,6 +5,7 @@ import {v4 as uuidv4} from "uuid";
 import { createSessionInDB, endSessionInDB, updateHeartbeatInDB,getActiveSessionFromDB} from "../db/crud/session.crud.js";
 import { upsertDevice } from "../db/crud/device.crud.js";
 import { getLocalIP } from "../utils/IPprovider.js";
+import {SESSION_TTL,HEARTBEAT_EXTEND} from "../../constants.js";
 
 export const startSession = asyncHandler(async(req,res)=>{
     const {device_type,device_name,device_id} = req.body;
@@ -33,7 +34,7 @@ export const startSession = asyncHandler(async(req,res)=>{
         new ApiResponse("Session created successfully", {
             session_id: sessionId,
             device_id: deviceId,
-            expires_in:300 //seconds
+            expires_in:SESSION_TTL //seconds
         }, 201)
     )    
 })
@@ -75,7 +76,7 @@ export const heartbeat = asyncHandler(async(req,res)=>{
 
     return res.status(200).json(
         new ApiResponse("Heartbeat updated successfully", {
-            expires_in:180,//seconds
+            expires_in:HEARTBEAT_EXTEND,//seconds
             server_time: Date.now()
         }, 200)
     )
