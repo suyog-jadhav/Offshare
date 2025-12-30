@@ -5,7 +5,7 @@ import fs from "fs";
 
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 
 import { createFile , getFilesBySession,deleteFileById,getFileById} from "../db/crud/file.crud.js";
 import { getActiveSessionFromDB } from "../db/crud/session.crud.js";

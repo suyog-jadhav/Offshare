@@ -1,5 +1,5 @@
 import { ApiError } from "../utils/ApiError.js";
-import { ApiResponse } from "../utils/apiResponse.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { createPrintSettings, getPrintSettingsBySession, updatePrintSettings} from "../db/crud/printsettings.crud.js";
 import { getActiveSessionFromDB } from "../db/crud/session.crud.js";

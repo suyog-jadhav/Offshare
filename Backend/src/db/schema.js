@@ -107,9 +107,10 @@ CREATE TABLE IF NOT EXISTS print_settings (
 -- =========================
 CREATE TABLE IF NOT EXISTS print_pricing (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    color_mode TEXT NOT NULL,     -- BW / COLOR
-    paper_size TEXT NOT NULL,     -- A4 / A3
-    price_per_page REAL NOT NULL
+    color_mode TEXT NOT NULL CHECK (color_mode IN ('BW', 'COLOR')),
+    paper_size TEXT NOT NULL CHECK (paper_size IN ('A4', 'A3')),
+    price_per_page REAL NOT NULL CHECK (price_per_page > 0),
+    UNIQUE (color_mode, paper_size)
 );
 
 -- =========================
@@ -120,12 +121,15 @@ CREATE TABLE IF NOT EXISTS print_jobs (
     file_id TEXT NOT NULL,
     settings_id TEXT NOT NULL,
 
-    pages INTEGER NOT NULL,           -- detected page count
-    copies INTEGER NOT NULL,          -- snapshot from settings
-    price_per_page REAL NOT NULL,     -- snapshot at print time
-    cost REAL NOT NULL,               -- pages × copies × price
+    pages INTEGER NOT NULL CHECK (pages > 0),
+    copies INTEGER NOT NULL CHECK (copies > 0),
+    price_per_page REAL NOT NULL CHECK (price_per_page > 0),
+    cost REAL NOT NULL CHECK (cost > 0),
 
-    status TEXT,                      -- PENDING / PRINTED / FAILED
+    status TEXT NOT NULL CHECK (
+        status IN ('PENDING', 'PRINTED', 'FAILED', 'CANCELLED')
+    ),
+
     printed_at DATETIME,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
@@ -175,6 +179,11 @@ ON sessions (expires_at);
 
 CREATE INDEX IF NOT EXISTS idx_pricing_lookup
 ON print_pricing (color_mode, paper_size);
+
+CREATE INDEX IF NOT EXISTS idx_print_jobs_file_id ON print_jobs(file_id);
+CREATE INDEX IF NOT EXISTS idx_print_jobs_status ON print_jobs(status);
+CREATE INDEX IF NOT EXISTS idx_print_jobs_created_at ON print_jobs(created_at);
+
 `);
 
 console.log("✅ Offline Xerox DB schema initialized (FINAL)");

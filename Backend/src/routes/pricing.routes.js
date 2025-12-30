@@ -1,18 +1,25 @@
 import { Router } from "express";
 import {
-  createPricing,
-  getAllPricing,
-  updatePricing,
-  deletePricing,
-  lookupPricing
+    createPricing,
+    getAllPricingController,
+    updatePricing,
+    deletePricing,
+    lookupPricing
 } from "../controllers/pricing.controller.js";
 
 const router = Router();
 
+/**
+ * Lookup must come FIRST
+ */
+router.get("/lookup", lookupPricing);
+
+/**
+ * Admin routes
+ */
 router.post("/", createPricing);
-router.get("/", getAllPricing);
+router.get("/", getAllPricingController);
 router.put("/:id", updatePricing);
 router.delete("/:id", deletePricing);
-router.get("/lookup", lookupPricing);
 
 export default router;
