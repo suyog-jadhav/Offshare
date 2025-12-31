@@ -11,5 +11,5 @@ export const verifyShopAuth = (req, res, next) => {
         throw new ApiError(403, "Invalid shop token");
     }
 
-    next();
+    return next();
 };

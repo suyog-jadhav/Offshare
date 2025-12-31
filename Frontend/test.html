@@ -1,18 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>QR Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
+
   <h2>Scan to Connect</h2>
+  <p id="status">Loading QR...</p>
   <img id="qr" width="300" />
 
   <script>
-    fetch("http://localhost:8000/qr/")
+    // MUST match process.env.SHOP_TOKEN
+    const SHOP_TOKEN = "local-shop-secret-123";
+
+    fetch("http://localhost:8000/api/qr", {
+      headers: {
+        "x-shop-token": SHOP_TOKEN
+      }
+    })
       .then(res => res.json())
       .then(data => {
+        if (!data.success) {
+          document.getElementById("status").innerText = data.message;
+          return;
+        }
+
         document.getElementById("qr").src = data.data.qr;
+        document.getElementById("status").innerText = "QR Ready";
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById("status").innerText = "Auth failed";
       });
   </script>
+
 </body>
 </html>

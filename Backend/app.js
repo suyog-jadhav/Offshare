@@ -21,7 +21,11 @@ import { ApiError } from "./src/utils/ApiError.js";
 const app = express();
 
 /* MIDDLEWARES */
-app.use(cors());
+app.use(cors(
+  {
+    origin: "*"
+  }
+));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
