@@ -12,7 +12,8 @@ import { v4 as uuidv4 } from "uuid";
  * Create a registered customer (NOT guest)
  */
 export const createNewCustomer = asyncHandler(async (req, res) => {
-  const { name, phone } = req.body;
+  console.log("Creating new customer with data:", req.body);
+  const { name, phone } = req.body || {};
 
   if (!name || !phone) {
     throw new ApiError(400, "Name and phone are required");

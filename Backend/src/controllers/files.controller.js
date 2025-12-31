@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import crypto from "crypto";
-import fs from "fs/promises";
+import fs from "fs";
 
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
