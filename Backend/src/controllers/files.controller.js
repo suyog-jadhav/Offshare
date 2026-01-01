@@ -7,8 +7,9 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
-import { createFile , getFilesBySession,deleteFileById,getFileById} from "../db/crud/file.crud.js";
+import { createFile, getFilesBySession, deleteFileById, getFileById } from "../db/crud/file.crud.js";
 import { getActiveSessionFromDB } from "../db/crud/session.crud.js";
+
 
 export const uploadFiles = asyncHandler(async (req, res) => {
   const { session_id, customer_id } = req.body;
@@ -26,6 +27,10 @@ export const uploadFiles = asyncHandler(async (req, res) => {
   // 2️⃣ Validate files
   if (!req.files || req.files.length === 0) {
     throw new ApiError(400, "At least one file is required");
+  }
+
+  if(customer_id){
+    
   }
 
   const savedFiles = [];

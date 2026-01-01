@@ -12,18 +12,19 @@ import { v4 as uuidv4 } from "uuid";
  * Create a registered customer (NOT guest)
  */
 export const createNewCustomer = asyncHandler(async (req, res) => {
+  console.log("Received request to create new customer");
   console.log("Creating new customer with data:", req.body);
-  const { name, phone } = req.body || {};
-
+  const { name, phone} = req.body || {};
   if (!name || !phone) {
-    throw new ApiError(400, "Name and phone are required");
+    throw new ApiError(400, "name and phone are required");
   }
 
-  // Prevent duplicate customers by phone
-  const existing = await getCustomerByPhone(phone);
-  if (existing) {
+  // Prevent duplicate customers by phone and customer_id (if provided)
+  const existingByPhone = await getCustomerByPhone(phone);
+  if (existingByPhone) {
     throw new ApiError(409, "Customer with this phone already exists");
   }
+
 
   const customer = {
     id: uuidv4(),
@@ -31,8 +32,17 @@ export const createNewCustomer = asyncHandler(async (req, res) => {
     phone,
     is_guest: 0
   };
+  console.log("Creating customer:", customer);
 
-  await createCustomer(customer);
+  try {
+    await createCustomer(customer);
+  } catch (err) {
+    console.error("Failed to create customer:", err);
+    if (err && err.code && err.code.includes("SQLITE_CONSTRAINT")) {
+      throw new ApiError(409, "Customer already exists");
+    }
+    throw new ApiError(500, "Failed to create customer");
+  }
 
   return res.status(201).json(
     new ApiResponse("Customer created successfully", customer, 201)

@@ -8,7 +8,8 @@ import { v4 as uuidv4 } from "uuid";
 
 export const createSettings = asyncHandler(async (req, res) => {
   const { session_id, settings } = req.body;
-
+  console.log("Received settings:", settings);
+  console.log("Received session_id:", session_id);
   if (!session_id || !settings) {
     throw new ApiError(400, "session_id and settings are required");
   }
@@ -34,6 +35,7 @@ export const createSettings = asyncHandler(async (req, res) => {
   };
 
   await createPrintSettings(settingsRecord);
+  console.log("Created settings:", settingsRecord);
 
   return res.status(201).json(
     new ApiResponse("Settings created successfully", settingsRecord, 201)

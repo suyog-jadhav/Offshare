@@ -3,10 +3,10 @@ import db from "../connection.js";
 export const createPrintSettings = (settings) => {
     db.prepare(`
         INSERT INTO print_settings (
-            id, color_mode, copies, paper_size, sides, orientation
+            id, session_id,color_mode, copies, paper_size, sides, orientation
         )
         VALUES (
-            @id, @color_mode, @copies,
+            @id, @session_id, @color_mode, @copies,
             @paper_size, @sides, @orientation
         )
     `).run(settings);
