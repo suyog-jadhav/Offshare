@@ -15,7 +15,7 @@ const router = Router();
 // session_id comes from body
 router.post(
   "/upload",
-  upload.array("files", 10),
+  upload.array("files", 20),
   validateActiveSession,
   uploadFiles
 );
