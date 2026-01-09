@@ -2,7 +2,8 @@ import { Router } from "express";
 import {
   createShop,
   getShop,
-  updateShop
+  updateShop,
+  deleteShop
 } from "../controllers/shop.controller.js";
 import { verifyShopAuth } from "../middlewares/shopAuth.middleware.js";
 
@@ -16,5 +17,6 @@ router.use(verifyShopAuth);
 
 router.get("/", getShop);
 router.put("/", updateShop);
+router.delete("/", deleteShop);
 
 export default router;

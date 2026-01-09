@@ -2,7 +2,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import {v4 as uuidv4} from "uuid";
-import { createShopInDB, getShopFromDB, updateShopInDB } from "../db/crud/shop.crud.js";
+import { createShopInDB, getShopFromDB, updateShopInDB, deleteShopFromDB} from "../db/crud/shop.crud.js";
 import { getLocalIP } from "../utils/IPprovider.js";
 
 export const createShop = asyncHandler(async (req,res)=>{
@@ -77,3 +77,16 @@ export const updateShop = asyncHandler(async (req,res)=>{
     );
 })
 
+export const deleteShop = asyncHandler(async (req, res) => {
+    const shop = await getShopFromDB();
+
+    if (!shop) {
+        throw new ApiError(404, "Shop not found");
+    }
+
+    deleteShopFromDB();
+
+    return res.status(200).json(
+        new ApiResponse("Shop deleted successfully", null, 200)
+    );
+});

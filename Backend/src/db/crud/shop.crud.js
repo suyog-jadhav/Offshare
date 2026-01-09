@@ -22,3 +22,7 @@ export const updateShopInDB = (shop) => {
         WHERE id = @id
     `).run(shop);
 };
+
+export const deleteShopFromDB = () => {
+    return db.prepare(`DELETE FROM shop`).run();
+};
