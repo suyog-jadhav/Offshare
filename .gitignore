@@ -1,0 +1,9 @@
+# Create a .gitignore file in the root directory
+echo "node_modules/
+.env
+*.db
+*.db-shm
+*.db-wal
+dist/
+build/
+.DS_Store" > .gitignore
