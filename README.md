@@ -158,7 +158,3 @@ npm --prefix Electron start  # Electron loads Frontend/Frontend/dist
 - Ensure `multer` storage directory is writable and rotated if storage is limited.
 
 ---
-If you want, I can:
-- commit this file to the repository (already added),
-- list all endpoints with exact handler file/line references,
-- or generate a smaller README.md instead. Which would you like next?
