@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9FAFB"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Print Settings"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Section -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Print Preferences"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="#374151"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Color Mode -->
+                <TextView
+                    android:text="Color Mode"
+                    style="@style/Label"/>
+
+                <Spinner
+                    android:id="@+id/spinnerColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@android:drawable/editbox_background"/>
+
+                <!-- Paper Size -->
+                <TextView
+                    android:text="Paper Size"
+                    style="@style/Label"/>
+
+                <Spinner
+                    android:id="@+id/spinnerPaper"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@android:drawable/editbox_background"/>
+
+                <!-- Print Sides -->
+                <TextView
+                    android:text="Print Sides"
+                    style="@style/Label"/>
+
+                <Spinner
+                    android:id="@+id/spinnerSides"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@android:drawable/editbox_background"/>
+
+                <!-- Orientation -->
+                <TextView
+                    android:text="Orientation"
+                    style="@style/Label"/>
+
+                <Spinner
+                    android:id="@+id/spinnerOrientation"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@android:drawable/editbox_background"/>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="16dp"
+                    android:background="#E5E7EB"/>
+
+                <!-- Number of Copies INLINE -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Number of Copies"
+                        android:textStyle="bold"
+                        android:textColor="#374151"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="#F3F4F6"
+                        app:cardElevation="0dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:padding="4dp"
+                            android:gravity="center">
+
+                            <Button
+                                android:id="@+id/btnMinus"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:text="−"
+                                android:textSize="18sp"
+                                android:backgroundTint="#E5E7EB"/>
+
+                            <TextView
+                                android:id="@+id/tvCopies"
+                                android:layout_width="40dp"
+                                android:layout_height="36dp"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="#111827"/>
+
+                            <Button
+                                android:id="@+id/btnPlus"
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:text="+"
+                                android:textSize="16sp"
+                                android:backgroundTint="#E5E7EB"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Save -->
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Save Print Settings"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:backgroundTint="#10B981"
+            android:textColor="#FFFFFF"/>
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#047857"/>
+
+        <!-- Back -->
+        <Button
+            android:id="@+id/btnGoBack"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="⬅ Go Back"
+            android:textAllCaps="false"
+            android:backgroundTint="#6B7280"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

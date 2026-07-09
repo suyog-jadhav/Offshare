@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#EDF1F2">
+
+    <!-- App Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OffShare Xerox"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05"
+        android:layout_marginBottom="36dp"/>
+
+    <!-- Connect Button -->
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="🔗 Connect to Shop"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="#F6F3F3"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.02"
+        android:elevation="6dp"
+        android:layout_marginTop="12dp"
+        android:clipToOutline="true"
+        android:background="@drawable/rounded_button"/>
+</LinearLayout>
